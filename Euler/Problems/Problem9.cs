@@ -23,6 +23,7 @@ namespace Euler.Problems
 
         private long SolutionOne(int pythagoreanSum)
         {
+            long iterations = 0;
             int largestA = pythagoreanSum / 3;
 
             for (int a = 1; a <= largestA; a++)
@@ -31,10 +32,12 @@ namespace Euler.Problems
                 {
                     for (int c = b + 1; a + b + c <= pythagoreanSum; c++)
                     {
+                        iterations++;
                         if (a + b + c == pythagoreanSum)
                         {
                             if (Math.Pow(a, 2) + Math.Pow(b, 2) == Math.Pow(c, 2))
                             {
+                                Console.WriteLine(iterations);
                                 return a * b * c;
                             }
                         }
@@ -42,25 +45,30 @@ namespace Euler.Problems
                 }
             }
 
+            Console.WriteLine(iterations);
             return -1;
         }
 
         private long SolutionTwo(int pythagoreanSum)
         {
+            long iterations = 0;
             int largestA = pythagoreanSum / 3;
 
             for (int a = 1; a <= largestA; a++)
             {
                 for (int b = a + 1; a + b + b + 1 <= pythagoreanSum; b++)
                 {
+                    iterations++;
                     int c = pythagoreanSum - b - a;
                     if (Math.Pow(a, 2) + Math.Pow(b, 2) == Math.Pow(c, 2))
                     {
+                        Console.WriteLine(iterations);
                         return a * b * c;
                     }
                 }
             }
 
+            Console.WriteLine(iterations);
             return -1;
         }
     }

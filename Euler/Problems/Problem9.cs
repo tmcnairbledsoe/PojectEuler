@@ -18,7 +18,7 @@ namespace Euler.Problems
             //There exists exactly one Pythagorean triplet for which a +b + c = 1000.
             //Find the product abc.
 
-            return SolutionOne(1000);
+            return SolutionTwo(1000);
         }
 
         private long SolutionOne(int pythagoreanSum)
@@ -47,6 +47,20 @@ namespace Euler.Problems
 
         private long SolutionTwo(int pythagoreanSum)
         {
+            int largestA = pythagoreanSum / 3;
+
+            for (int a = 1; a <= largestA; a++)
+            {
+                for (int b = a + 1; a + b + b + 1 <= pythagoreanSum; b++)
+                {
+                    int c = pythagoreanSum - b - a;
+                    if (Math.Pow(a, 2) + Math.Pow(b, 2) == Math.Pow(c, 2))
+                    {
+                        return a * b * c;
+                    }
+                }
+            }
+
             return -1;
         }
     }

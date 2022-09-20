@@ -14,23 +14,24 @@ namespace Euler.Problems
             //By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
             //What is the 10001st prime number ?
 
-            int primeNumberToReach = 10001;
-            int sequenceNumber = 0;
-            long theNumber = 2;
+            return SolutionOne(10001);
+        }
+
+        private long SolutionOne(int primeNumberToReach)
+        {
+            int sequenceNumber = 1;
+            long theNumber = 1;
 
 
-            while (sequenceNumber < primeNumberToReach)
+            if (primeNumberToReach == 1)
+                return 2;
+
+            do
             {
+                theNumber = theNumber + 2;
                 if (Helpers.IsPrime(theNumber))
-                {
                     sequenceNumber++;
-                    if (sequenceNumber == primeNumberToReach)
-                    {
-                        return theNumber;
-                    }
-                }
-                theNumber++;
-            }
+            } while (sequenceNumber < primeNumberToReach);
 
             return theNumber;
         }

@@ -18,18 +18,22 @@ namespace Euler.Problems
             //There exists exactly one Pythagorean triplet for which a +b + c = 1000.
             //Find the product abc.
 
-            int pythagoreanSum = 1000;
+            return SolutionOne(1000);
+        }
+
+        private long SolutionOne(int pythagoreanSum)
+        {
             int largestA = pythagoreanSum / 3;
 
-            for (int a = 3; a <= largestA; a++)
+            for (int a = 1; a <= largestA; a++)
             {
                 for (int b = a + 1; a + b + b + 1 <= pythagoreanSum; b++)
                 {
                     for (int c = b + 1; a + b + c <= pythagoreanSum; c++)
                     {
-                        if (Math.Pow(a,2) + Math.Pow(b,2) == Math.Pow(c,2))
+                        if (a + b + c == pythagoreanSum)
                         {
-                            if (a + b + c == pythagoreanSum)
+                            if (Math.Pow(a, 2) + Math.Pow(b, 2) == Math.Pow(c, 2))
                             {
                                 return a * b * c;
                             }
@@ -38,6 +42,11 @@ namespace Euler.Problems
                 }
             }
 
+            return -1;
+        }
+
+        private long SolutionTwo(int pythagoreanSum)
+        {
             return -1;
         }
     }

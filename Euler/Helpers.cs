@@ -8,6 +8,8 @@ namespace Euler
 {
     static class Helpers
     {
+        private static List<long> listOfPrimes = new List<long>() { 2 };
+
         //Prime check
         public static bool IsPrime(long number)
         {
@@ -107,6 +109,38 @@ namespace Euler
             }
 
             return sequenceLength;
+        }
+
+        //Divisors
+        public static int GetNumberOfDivisors(long number)
+        {
+            HashSet<long> factors = new HashSet<long>() { 1, number };
+            double limit = (long)Math.Sqrt(number);
+
+            for (long j = listOfPrimes.Max() + 1; j <= limit; j++)
+            {
+                if (Helpers.IsPrime(j))
+                    listOfPrimes.Add(j);
+            }
+
+            foreach (long prime in listOfPrimes)
+            {
+                if (number % prime == 0)
+                {
+                    factors.Add(prime);
+                    factors.Add(number / prime);
+                    for (long i = prime + prime; i <= limit; i += prime)
+                    {
+                        if (number % i == 0)
+                        {
+                            factors.Add(i);
+                            factors.Add(number / i);
+                        }
+                    }
+                }
+            }
+
+            return factors.Count();
         }
     }
 }

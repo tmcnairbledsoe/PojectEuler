@@ -10,6 +10,15 @@ namespace Euler
     {
         private static List<long> listOfPrimes = new List<long>() { 2 };
 
+        //Math
+        public static double Factorial(double number)
+        {
+            if (number == 0)
+                return 1;
+            else
+                return number * Factorial(number - 1);
+        }
+
         //Prime check
         public static bool IsPrime(long number)
         {

@@ -28,7 +28,7 @@ namespace Euler.Problems
 
             //Answer : 137846528820
 
-            return SolutionOne(20);
+            return SolutionFour(20, 20);
         }
 
         //Recursive Brute Force: 41m
@@ -37,6 +37,37 @@ namespace Euler.Problems
             dimensions = gridDimensions;
             Traverse();
             return paths;
+        }
+
+        //Self found method, only works for a square grid.
+        private long SolutionTwo(int gridDimensions)
+        {
+            long currentNumOfPaths = 6;
+
+            for (double i = 2; i < gridDimensions; i++)
+            {
+                currentNumOfPaths = (long)(currentNumOfPaths * (3 + ((i - 1) / (i + 1))));
+            }
+
+            return currentNumOfPaths;
+        }
+
+        //Combinations without repetition formula for a square
+        private long SolutionThree(int gridDimensions)
+        {
+            int x = gridDimensions;
+            int y = gridDimensions;
+
+            int numOfObjects = x;
+            int totalNumOfPaths = x + y;
+
+            return (long)(Helpers.Factorial(totalNumOfPaths) / (Helpers.Factorial(numOfObjects) * Helpers.Factorial(totalNumOfPaths - numOfObjects)));
+        }
+
+        //Combinations without repetition formula for a rectangular grid of x by y
+        private long SolutionFour(int x, int y)
+        {
+            return (long)(Helpers.Factorial(x+y) / (Helpers.Factorial(x) * Helpers.Factorial(y)));
         }
 
         public void Traverse()

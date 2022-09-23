@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,79 @@ namespace Euler
                 return 1;
             else
                 return number * Factorial(number - 1);
+        }
+
+        public static BigInteger BigIntFactorial(BigInteger number)
+        {
+            if (number == 0)
+                return 1;
+            else
+                return number * BigIntFactorial(number - 1);
+        }
+
+        public static string LongMultiplication(string numberOne, string numberTwo)
+        {
+            List<string> numbersToSum = new List<string>();
+            string trailingZeros = "";
+            for (int i = numberOne.Length - 1; i >= 0; i--)
+            {
+                int carryover = 0;
+                string totalProduct = "";
+                for (int j = numberTwo.Length - 1; j >= 0; j--)
+                {
+                    int product = (Convert.ToInt32(numberOne[i].ToString()) * Convert.ToInt32(numberTwo[j].ToString())) + carryover;
+                    if (j != 0)
+                    {
+                        totalProduct = String.Concat(product.ToString()[product.ToString().Length - 1], totalProduct);
+                    }
+                    else
+                    {
+                        totalProduct = String.Concat(product.ToString(), totalProduct);
+                    }
+                    carryover = product / 10;
+                }
+                numbersToSum.Add(String.Concat(totalProduct, trailingZeros));
+                trailingZeros += "0";
+            }
+            return LongAddition(numbersToSum.ToArray());
+        }
+
+        public static string LongAddition(string[] arrayOfNumbers)
+        {
+            int numberSize = 0;
+            long remainder = 0;
+            string theNumber = "";
+
+            if (arrayOfNumbers.Length == 0)
+                return "";
+            if (arrayOfNumbers.Length == 1)
+                return arrayOfNumbers[0];
+
+            foreach (string number in arrayOfNumbers)
+            {
+                if (number.Length > numberSize)
+                {
+                    numberSize = number.Length;
+                }
+            }
+
+            for (int i = numberSize - 1; i >= 0; i--)
+            {
+                long rowSum = remainder;
+                foreach (string number in arrayOfNumbers)
+                {
+                    if (i - (numberSize - number.Length) >= 0)
+                        rowSum += Convert.ToInt32(number[i - (numberSize - number.Length)].ToString());
+                }
+
+                if (i == 0)
+                    theNumber = String.Concat(rowSum.ToString(), theNumber);
+                else
+                    theNumber = String.Concat(rowSum.ToString()[rowSum.ToString().Length - 1], theNumber);
+
+                remainder = rowSum / 10;
+            }
+            return theNumber;
         }
 
         //Prime check

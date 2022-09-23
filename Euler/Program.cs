@@ -8,7 +8,7 @@ namespace Euler // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            var problem = new Problem17();
+            var problem = new Problem19();
 
             Console.WriteLine(problem.Solve().ToString());
         }

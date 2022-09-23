@@ -52,16 +52,17 @@ namespace Euler.Problems
             return currentNumOfPaths;
         }
 
-        //Combinations without repetition formula for a square
+        //Euler's method
         private long SolutionThree(int gridDimensions)
         {
-            int x = gridDimensions;
-            int y = gridDimensions;
+            long currentNumOfPaths = 1;
 
-            int numOfObjects = x;
-            int totalNumOfPaths = x + y;
+            for (double i = 2; i < gridDimensions; i++)
+            {
+                currentNumOfPaths = (long)((currentNumOfPaths + i) / i);
+            }
 
-            return (long)(Helpers.Factorial(totalNumOfPaths) / (Helpers.Factorial(numOfObjects) * Helpers.Factorial(totalNumOfPaths - numOfObjects)));
+            return currentNumOfPaths;
         }
 
         //Combinations without repetition formula for a rectangular grid of x by y

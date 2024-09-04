@@ -18,6 +18,7 @@ namespace Euler.Problems
 {
     internal class Problem21
     {
+        List<int> numberRange = new List<int>();
         public long Solve()
         {
             // Let d(n) be defined as the sum of proper divisors of n(numbers less than n which divide evenly into n).
@@ -27,16 +28,35 @@ namespace Euler.Problems
 
             //Evaluate the sum of all the amicable numbers under 10000.
 
+            int topNumber = 10000;
 
-            return SolutionOne(1000);
+            numberRange = Enumerable.Range(1, 1000).ToList();
+
+            return SolutionOne(topNumber);
         }
 
         //First try, brute force. Use Solution for Problem 12
         private long SolutionOne(int topNumber)
         {
-            long sum = 0;
+            for (int i = 1; i <= topNumber/2; i++)
+            {
+                long a = Helpers.GetListOfProperDivisors(i).Sum();
+                long b = Helpers.GetListOfProperDivisors(a).Sum();
 
-            return sum;
+                if (a != b)
+                {
+                    if (b != i)
+                    { 
+                        numberRange.Remove(i);
+                    }
+                }
+                else
+                {
+                numberRange.Remove(i);
+                }
+            }
+
+            return numberRange.Sum();
         }
 
 }

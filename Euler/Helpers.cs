@@ -195,6 +195,36 @@ namespace Euler
         }
 
         //Divisors
+        public static HashSet<long> GetListOfProperDivisors(long number)
+        {
+            HashSet<long> factors = new HashSet<long>() { 1 };
+            double limit = (long)Math.Sqrt(number);
+
+            for (long j = listOfPrimes.Max() + 1; j <= limit; j++)
+            {
+                if (Helpers.IsPrime(j))
+                    listOfPrimes.Add(j);
+            }
+
+            foreach (long prime in listOfPrimes)
+            {
+                if (number % prime == 0)
+                {
+                    factors.Add(prime);
+                    factors.Add(number / prime);
+                    for (long i = prime + prime; i <= limit; i += prime)
+                    {
+                        if (number % i == 0)
+                        {
+                            factors.Add(i);
+                            factors.Add(number / i);
+                        }
+                    }
+                }
+            }
+
+            return factors;
+        }
         public static int GetNumberOfDivisors(long number)
         {
             HashSet<long> factors = new HashSet<long>() { 1, number };
